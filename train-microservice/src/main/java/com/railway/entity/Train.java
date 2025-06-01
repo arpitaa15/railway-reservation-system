@@ -22,7 +22,6 @@ import lombok.Setter;
 public class Train {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long trainId;
     private String trainName;
     private String source;

@@ -14,7 +14,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TrainDto {
-
+	
+	private Long trainId;
     private String trainName;
     private String source;
     private String destination;

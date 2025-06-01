@@ -10,8 +10,9 @@ public interface TrainService {
 	TrainDto addTrain(TrainDto dto);
 	List<Train> getAllTrains();
 	Train getTrainById(Long trainId);
-	List<Train> getTrainsByName(String trainName);
+	Train getTrainByName(String trainName);
 	List<Train> getTrainsByRoute(String source, String destination);
 	TrainDto updateTrain(Long trainId, TrainDto dto);
+	void deleteTrain(Long trainId);
 	
 }
