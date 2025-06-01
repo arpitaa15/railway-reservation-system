@@ -26,31 +26,38 @@ public class TrainController {
 	    private TrainService trainService;
 
 //	 	http://localhost:9003/trains/add
-	    @PostMapping("/add")
+	    @PostMapping(value = "/add", consumes = "application/json")
 	    public ResponseEntity<TrainDto> addTrain(@RequestBody TrainDto trainDTO) {
 	        TrainDto savedTrain = trainService.addTrain(trainDTO);
 	        return new ResponseEntity<>(savedTrain, HttpStatus.CREATED);
 	    }
 	    
+//	    http://localhost:9003/trains/listOfTrains
+	    @GetMapping(value = "/listOfTrains", produces = "application/json")
+	    public ResponseEntity<List<Train>> getAllTrains() {
+	        List<Train> trains = trainService.getAllTrains();
+	        return ResponseEntity.ok(trains);
+	    }
+	    
 //	    http://localhost:9003/trains/Id/12101
-	    @GetMapping("/Id/{trainId}")
+	    @GetMapping(value = "/Id/{trainId}", produces = "application/json")
 	    public ResponseEntity<Train> getTrainById(@PathVariable Long trainId) {
 	        Train train = trainService.getTrainById(trainId);
 	        return ResponseEntity.ok(train);
 	    }
 
-//	    http://localhost:9003/trains/listOfTrains
-	    @GetMapping("/listOfTrains")
-	    public ResponseEntity<List<Train>> getAllTrains() {
-	        List<Train> trains = trainService.getAllTrains();
-	        return ResponseEntity.ok(trains);
-	    }
-
 //	    http://localhost:9003/trains/search/
-	    @GetMapping("/search/{trainName}")
+	    @GetMapping(value = "/search/{trainName}", produces = "application/json")
 	    public ResponseEntity<Train> getTrainByName(@PathVariable String trainName) {
 	        Train train = trainService.getTrainByName(trainName);
 	        return ResponseEntity.ok(train);
+	    }
+	    
+//	    http://localhost:9003/trains/route?
+	    @GetMapping(value = "/route", produces = "application/json")
+	    public ResponseEntity<List<Train>> getTrainsByRoute(@RequestParam String source, @RequestParam String destination) {
+			List<Train> trains = trainService.getTrainsByRoute(source, destination);
+	    	return ResponseEntity.ok(trains);
 	    }
 
 //	    http://localhost:9003/trains/update/{trainId}
